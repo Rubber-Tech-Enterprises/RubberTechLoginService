@@ -1,0 +1,6 @@
+Api:
+ version: v1
+server:
+  servlet:
+    context-path: /security
+  port: 9093
