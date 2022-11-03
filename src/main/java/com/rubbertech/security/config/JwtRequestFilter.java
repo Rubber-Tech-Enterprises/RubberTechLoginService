@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.hql.internal.ast.tree.DisplayableNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			logger.error("jwt token not found");
 		}
 		filterChain.doFilter(request, response);
+		
 	}
 
 }

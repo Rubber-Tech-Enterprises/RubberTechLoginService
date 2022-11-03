@@ -2,7 +2,9 @@ package com.rubbertech.security.service;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,13 +32,19 @@ public class UserService implements UserDetails {
 		this.user.setUserName(dbuser.getUserName());
 		this.user.setPassword(dbuser.getPassword());
 		this.user.setEmail(dbuser.getEmail());
+		this.user.setAccountNonExpired(dbuser.getAccountNonExpired());
+		this.user.setAccountNonLocked(dbuser.getAccountNonLocked());
+		this.user.setCredentialsNonExpired(dbuser.getCredentialsNonExpired());
+		this.user.setEnabled(dbuser.getEnabled());
+		this.user.setUserRole(dbuser.getUserRole());
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		HashSet<SimpleGrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority("admin"));
-		return null;
+		 List<GrantedAuthority> authorities = user.getUserRole().stream()
+			        .map(role -> new SimpleGrantedAuthority(role))
+			        .collect(Collectors.toList());
+		 return authorities;
 	}
 
 	@Override
@@ -51,22 +59,22 @@ public class UserService implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return user.getAccountNonExpired();
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return user.getAccountNonLocked();
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
+		return user.getCredentialsNonExpired();
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return user.getEnabled();
 	}
 
 }

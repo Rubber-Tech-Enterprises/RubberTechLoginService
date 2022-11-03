@@ -37,6 +37,7 @@ public class UserSecurity extends WebSecurityConfigurerAdapter {
 		.cors().disable()
 		.authorizeRequests()
 		.antMatchers("/v1/token").permitAll()
+		.antMatchers("/v1/hello").hasAnyRole("USER")
         .antMatchers(HttpMethod.OPTIONS).permitAll()
 		.anyRequest()
 		.authenticated()
@@ -62,3 +63,5 @@ public class UserSecurity extends WebSecurityConfigurerAdapter {
 		return super.authenticationManager();
 	}
 }
+
+//   
