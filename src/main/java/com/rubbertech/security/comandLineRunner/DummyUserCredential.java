@@ -1,5 +1,7 @@
 package com.rubbertech.security.comandLineRunner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,13 @@ public class DummyUserCredential implements CommandLineRunner {
 		user.setUserName("admin");
 		user.setPassword(security.passwordEncoder().encode("admin"));
 		user.setEmail("admin@gmail.com");
+		user.setAccountNonExpired(Boolean.TRUE);
+		user.setAccountNonLocked(Boolean.TRUE);
+		user.setCredentialsNonExpired(Boolean.TRUE);
+		user.setEnabled(Boolean.TRUE);
+		user.setUserRole(Arrays.asList("USER"));
 		userRepository.save(user);
-		
-		
+
 	}
 
 }
