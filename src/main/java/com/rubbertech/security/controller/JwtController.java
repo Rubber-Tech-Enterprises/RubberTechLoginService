@@ -2,6 +2,8 @@ package com.rubbertech.security.controller;
 
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,6 +23,8 @@ import com.rubbertech.security.util.JwtUtil;
 @RestController
 @RequestMapping(path = "${Api.Version}")
 public class JwtController implements JwtApi {
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(JwtController.class);
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -34,7 +38,7 @@ public class JwtController implements JwtApi {
 	@Override
 	public JwtResponse generateToken(JwtRequest request) {
 		UserDetails userDetails = null;
-		JwtResponse jwtResponse=null;
+		JwtResponse jwtResponse = null;
 		try {
 
 			this.authenticationManager.authenticate(
@@ -51,17 +55,17 @@ public class JwtController implements JwtApi {
 			userDetails = customUserDetailsService.loadUserByUsername(request.getUsername());
 			if (Objects.nonNull(userDetails)) {
 				String token = jwtUtil.generateToken(userDetails);
-                 if(Objects.nonNull(token)){
-                	 jwtResponse=new JwtResponse();
-                	jwtResponse.setJwtToken(token);
-                 }
+				if (Objects.nonNull(token)) {
+					jwtResponse = new JwtResponse();
+					jwtResponse.setJwtToken(token);
+				}
 			} else {
 				throw new BussinesException("user deatials not found");
 			}
 		} catch (Exception e) {
 			throw new BussinesException("unable to get user deatials");
 		}
-    	return jwtResponse;
+		return jwtResponse;
 	}
 
 }
