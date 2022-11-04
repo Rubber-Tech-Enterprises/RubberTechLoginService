@@ -49,7 +49,7 @@ public class User {
 	@JsonProperty("enabled")
 	private Boolean enabled;
 	@JsonProperty("userRole")
-	@ElementCollection(targetClass=String.class)
+	@ElementCollection(targetClass=String.class,fetch = FetchType.EAGER)
 	private List<String> userRole;
 	
 	public long getId() {

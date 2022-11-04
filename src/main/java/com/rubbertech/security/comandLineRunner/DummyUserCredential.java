@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.rubbertech.security.config.UserSecurity;
 import com.rubbertech.security.model.User;
+import com.rubbertech.security.model.UserRole;
 import com.rubbertech.security.repo.UserRepository;
 
 //@Profile(value = {"dev","test"})
@@ -37,7 +38,7 @@ public class DummyUserCredential implements CommandLineRunner {
 		user.setAccountNonLocked(Boolean.TRUE);
 		user.setCredentialsNonExpired(Boolean.TRUE);
 		user.setEnabled(Boolean.TRUE);
-		user.setUserRole(Arrays.asList("USER"));
+		user.setUserRole(Arrays.asList(UserRole.ROLE_ADMIN.getUserRole()));
 		userRepository.save(user);
 
 	}

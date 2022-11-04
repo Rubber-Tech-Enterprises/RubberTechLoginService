@@ -15,6 +15,6 @@ spring:
     properties:
        hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
