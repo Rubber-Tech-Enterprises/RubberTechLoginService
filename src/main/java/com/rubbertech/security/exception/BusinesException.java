@@ -2,7 +2,7 @@ package com.rubbertech.security.exception;
 
 import java.time.LocalDate;
 
-public class BussinesException extends RuntimeException{
+public class BusinesException extends RuntimeException{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -11,32 +11,32 @@ public class BussinesException extends RuntimeException{
 	private String details;
 	
 	
-	public BussinesException() {
+	public BusinesException() {
 		super();
 	}
 
 
-	public BussinesException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public BusinesException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);	
 	}
 
 
-	public BussinesException(String message, Throwable cause) {
+	public BusinesException(String message, Throwable cause) {
 		super(message, cause);	
 	}
 
 
-	public BussinesException(String message) {
+	public BusinesException(String message) {
 		super(message);	
 	}
 
 
-	public BussinesException(Throwable cause) {
+	public BusinesException(Throwable cause) {
 		super(cause);
 	}
 
 
-	public BussinesException(LocalDate date, String message, String details) {
+	public BusinesException(LocalDate date, String message, String details) {
 		super();
 		this.date = date;
 		this.message = message;

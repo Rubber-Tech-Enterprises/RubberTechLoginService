@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
-import com.rubbertech.security.exception.BussinesException;
+import com.rubbertech.security.exception.BusinesException;
 
 @Component
 public class UserValidator {
@@ -15,7 +15,7 @@ public class UserValidator {
 		if (Pattern.compile(regularpatternforname).matcher(validatorUserName).matches()) {
 			check = true;
 		} else {
-			throw new BussinesException(validatorUserName + " not acceptable");
+			throw new BusinesException(validatorUserName + " not acceptable");
 		}
 		return check;
 	}
@@ -26,7 +26,7 @@ public class UserValidator {
 		if (Pattern.compile(regularpatternforname).matcher(validatorId).matches()) {
 			check = true;
 		} else {
-			throw new BussinesException(validatorId + " not acceptable");
+			throw new BusinesException(validatorId + " not acceptable");
 		}
 		return check;
 	}
@@ -37,7 +37,7 @@ public class UserValidator {
 		if (Pattern.compile(regularpatternforname).matcher(password).matches()) {
 			check = true;
 		} else {
-			throw new BussinesException(password + " not acceptable");
+			throw new BusinesException(password + " not acceptable");
 		}
 		return check;
 	}

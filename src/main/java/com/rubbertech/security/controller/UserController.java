@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rubbertech.security.api.UserApi;
-import com.rubbertech.security.exception.BussinesException;
+import com.rubbertech.security.exception.BusinesException;
 import com.rubbertech.security.model.User;
 import com.rubbertech.security.repo.UserRepository;
 import com.rubbertech.security.service.UserService;
@@ -46,7 +46,7 @@ public class UserController implements UserApi {
 				return new UserService(user);
 			}
 		} catch (Exception e) {
-			throw new BussinesException("user not found",e);
+			throw new BusinesException("user not found",e);
 		}
 		LOGGER.info("exiting loadUserByUsername method ");
 		return null;
@@ -63,7 +63,7 @@ public class UserController implements UserApi {
 			}
 		} catch (Exception e) {
 			LOGGER.error("unable to find username from token : {}",e.getSuppressed());
-			throw new BussinesException("unable to find username from token", e);
+			throw new BusinesException("unable to find username from token", e);
 		}	
 		LOGGER.info("exiting the getUsernameFromToken");
 		return null;

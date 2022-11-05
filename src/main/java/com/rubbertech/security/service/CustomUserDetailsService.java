@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.rubbertech.security.exception.BussinesException;
+import com.rubbertech.security.exception.BusinesException;
 import com.rubbertech.security.model.User;
 import com.rubbertech.security.repo.UserRepository;
 
@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if(Objects.nonNull(user)) {
 			return new UserService(user);
 		}else {
-			throw new BussinesException("user not faund");
+			throw new BusinesException("user not faund");
 		}
 	}
 

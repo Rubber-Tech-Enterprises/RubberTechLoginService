@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.rubbertech.security.common.SecurityConstant;
-import com.rubbertech.security.exception.BussinesException;
+import com.rubbertech.security.exception.BusinesException;
 import com.rubbertech.security.service.CustomUserDetailsService;
 import com.rubbertech.security.util.JwtUtil;
 
@@ -46,7 +46,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			try {
 				username = jwtUtil.getUsernameFromToken(jwtToken);
 			} catch (Exception e) {
-				throw new BussinesException("unable to find user from jwt token");
+				throw new BusinesException("unable to find user from jwt token");
 			}
 
 			if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
