@@ -1,13 +1,16 @@
 package com.rubbertech.security.util;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
 import com.rubbertech.security.exception.BusinesException;
+import com.rubbertech.security.model.UserRole;
 
 @Component
-public class UserValidator {
+public class UserValidatorUtil {
 
 	public boolean validatedUserName(String validatorUserName) {
 		boolean check = false;
@@ -40,6 +43,17 @@ public class UserValidator {
 			throw new BusinesException(password + " not acceptable");
 		}
 		return check;
+	}
+	
+	public String userRoleCheck(String checkUserRole) {
+		List<String> roles=Arrays.asList(UserRole.ROLE_ADMIN.getUserRole(),UserRole.ROLE_USER.getUserRole(),UserRole.ROLE_SELLER.getUserRole());
+		for(String userRole:roles) {
+			if(checkUserRole.equalsIgnoreCase(userRole)) {
+				checkUserRole=userRole;
+				return checkUserRole;
+			}
+		}
+		return null;
 	}
 
 }
