@@ -1,5 +1,7 @@
 package com.rubbertech.security.service;
 
+import com.rubbertech.security.model.UserRegistration;
+
 public interface UserAuthService {
 
 	public void updateUserAccountNonExpired(String username, Integer accountNonExpired);
@@ -15,5 +17,7 @@ public interface UserAuthService {
 	public void removeUserRole(String username,String userRole);
 	
 	public void addUserRole(String username,String userRole);
+	
+	public void userRegistration(UserRegistration userRegistration);
 
 }
