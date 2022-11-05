@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rubbertech.security.api.JwtApi;
-import com.rubbertech.security.exception.BussinesException;
+import com.rubbertech.security.exception.BusinesException;
 import com.rubbertech.security.model.JwtRequest;
 import com.rubbertech.security.model.JwtResponse;
 import com.rubbertech.security.service.CustomUserDetailsService;
@@ -46,10 +46,10 @@ public class JwtController implements JwtApi {
 
 		} catch (UsernameNotFoundException e) {
 			e.printStackTrace();
-			throw new BussinesException("Bad Credentials");
+			throw new BusinesException("Bad Credentials");
 		} catch (BadCredentialsException e) {
 			e.printStackTrace();
-			throw new BussinesException("Bad Credentials");
+			throw new BusinesException("Bad Credentials");
 		}
 		try {
 			userDetails = customUserDetailsService.loadUserByUsername(request.getUsername());
@@ -60,10 +60,10 @@ public class JwtController implements JwtApi {
 					jwtResponse.setJwtToken(token);
 				}
 			} else {
-				throw new BussinesException("user deatials not found");
+				throw new BusinesException("user deatials not found");
 			}
 		} catch (Exception e) {
-			throw new BussinesException("unable to get user deatials");
+			throw new BusinesException("unable to get user deatials");
 		}
 		return jwtResponse;
 	}
