@@ -119,7 +119,7 @@ public class UserAuthController implements UserAuthApi {
 		LOGGER.info("entering addUserRole");
 		LOGGER.debug("addUserRole request username: {} ,userRole :{} ",username,userRole);
 		try {
-			userAuthService.addUserRole(username, userRole);
+			userAuthService.addUserRole(username, userRole); 
 			return ResponseEntity.accepted().build();
 		}catch (BusinesException e) {
 			LOGGER.error("error in addUserRole UserAuthController : {}",e.getMessage());
