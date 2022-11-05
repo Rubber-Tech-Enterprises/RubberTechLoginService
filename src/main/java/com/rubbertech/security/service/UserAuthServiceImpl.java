@@ -26,7 +26,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 				accountNonExpired);
 		try {
 			if (Objects.nonNull(username) && Objects.nonNull(accountNonExpired) && accountNonExpired.equals(0) || accountNonExpired.equals(1)) {
-				userRepository.updateAccountNonExpired(username, accountNonExpired);
+				userRepository.updateUserAccountNonExpired(username, accountNonExpired);
 			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateUserAccountNonExpired :{}",e.getMessage());
@@ -43,7 +43,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.debug("updateaccountNonLocked request username: {} accountNonLocked : {}",username,accountNonLocked);
 		try {
 			if (Objects.nonNull(username) && Objects.nonNull(accountNonLocked)&& accountNonLocked.equals(0) || accountNonLocked.equals(1)) {
-				userRepository.updateAccountNonLocked(username, accountNonLocked);
+				userRepository.updateUserAccountNonLocked(username, accountNonLocked);
 			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateAccountNonLocked :{}",e.getMessage());
@@ -60,7 +60,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.debug("updateCredentialsNonExpired request username: {} credentialsNonExpired : {}",username,credentialsNonExpired);
 		try {
 			if (Objects.nonNull(username) && Objects.nonNull(credentialsNonExpired) && credentialsNonExpired.equals(0) || credentialsNonExpired.equals(1) ) {
-				userRepository.updateCredentialsNonExpired(username, credentialsNonExpired);
+				userRepository.updateUserCredentialsNonExpired(username, credentialsNonExpired);
 			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateCredentialsNonExpired :{}",e.getMessage());
@@ -78,7 +78,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.debug("updateCredentialsNonExpired request username: {} accountEnable : {}",username,accountEnable);
 		try {
 			if (Objects.nonNull(username) && Objects.nonNull(accountEnable) && accountEnable.equals(0) || accountEnable.equals(1) ) {
-				userRepository.updateAccountEnable(username, accountEnable);
+				userRepository.updateUserAccountEnable(username, accountEnable);
 			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateAccountEnable :{}",e.getMessage());
@@ -96,7 +96,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.debug("UpdateUserRole request  username: {} oldUserRole : {} newUserRole:{} ",userName,oldUserRole,newUserRole);
 		try {
 			if (Objects.nonNull(userName) && Objects.nonNull(oldUserRole) && Objects.nonNull(newUserRole) ) {
-				userRepository.UpdateUserRole(userName, oldUserRole, newUserRole);
+				userRepository.updateUserRole(userName, oldUserRole, newUserRole);
 			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in UpdateUserRole :{}",e.getMessage());
@@ -134,7 +134,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 			if (Objects.nonNull(username) && Objects.nonNull(userRole) && Objects.nonNull(allUserRole)) {
 				String checkedRole = allUserRole.stream().filter(role->role.equalsIgnoreCase(userRole)).findFirst().orElse(null);
 				if(Objects.isNull(checkedRole)) {
-				userRepository.addUserRole(username, userRole);
+				userRepository.addUserRoles(username, userRole);
 				}else {
 					LOGGER.error("Role already exist username: {}",username);
 				}

@@ -40,7 +40,7 @@ public interface UserAuthApi {
 	public ResponseEntity<Void> updateAccountEnable(@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "accountEnable", required = true) Integer acccountEnable);
 	
-	@PutMapping(path = "/add/user/role")
+	@PutMapping(path = "/update/user/role")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
