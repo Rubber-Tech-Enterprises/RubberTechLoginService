@@ -1,5 +1,6 @@
 package com.rubbertech.security.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rubbertech.security.exception.BusinesException;
+import com.rubbertech.security.model.UserRole;
 import com.rubbertech.security.repo.UserRepository;
+import com.rubbertech.security.util.UserValidatorUtil;
 
 @Service
 public class UserAuthServiceImpl implements UserAuthService {
@@ -18,6 +21,9 @@ public class UserAuthServiceImpl implements UserAuthService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserValidatorUtil userValidatorUtil;
 
 	@Override
 	public void updateUserAccountNonExpired(String username, Integer accountNonExpired) {
@@ -95,6 +101,10 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.info("enter UpdateUserRole");
 		LOGGER.debug("UpdateUserRole request  username: {} oldUserRole : {} newUserRole:{} ",userName,oldUserRole,newUserRole);
 		try {
+			
+			oldUserRole=userValidatorUtil.userRoleCheck(oldUserRole);
+			newUserRole=userValidatorUtil.userRoleCheck(newUserRole);
+			
 			if (Objects.nonNull(userName) && Objects.nonNull(oldUserRole) && Objects.nonNull(newUserRole) ) {
 				userRepository.updateUserRole(userName, oldUserRole, newUserRole);
 			}
@@ -112,6 +122,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.info("enter removeUserRole");
 		LOGGER.debug("removeUserRole request  username: {} userRole : {} ",username,userRole);
 		try {
+			userRole=userValidatorUtil.userRoleCheck(userRole);
 			if (Objects.nonNull(username) && Objects.nonNull(userRole)) {
 				userRepository.removeUserRole(username, userRole);
 			}
@@ -129,10 +140,13 @@ public class UserAuthServiceImpl implements UserAuthService {
 		LOGGER.info("enter addUserRole");
 		LOGGER.debug("addUserRole request  username: {} userRole : {} ",username,userRole);
 		try {
+			userRole=userValidatorUtil.userRoleCheck(userRole);
 			List<String> allUserRole = userRepository.getAllUserRole(username);
 			LOGGER.debug("addUserRole response :{}",allUserRole);
+			userRole=userValidatorUtil.userRoleCheck(userRole);
 			if (Objects.nonNull(username) && Objects.nonNull(userRole) && Objects.nonNull(allUserRole)) {
-				String checkedRole = allUserRole.stream().filter(role->role.equalsIgnoreCase(userRole)).findFirst().orElse(null);
+				String checkUserRole=userRole;
+				String checkedRole = allUserRole.stream().filter(role->role.equalsIgnoreCase(checkUserRole)).findFirst().orElse(null);
 				if(Objects.isNull(checkedRole)) {
 				userRepository.addUserRoles(username, userRole);
 				}else {
