@@ -78,11 +78,16 @@ public class UserController implements UserApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> userRegistration(UserRegistration userRegistration) {
+	public ResponseEntity<Boolean> userRegistration(UserRegistration userRegistration) {
 		LOGGER.info("enetrig the userRegistration");
 		try {
-			userAuthService.userRegistration(userRegistration);
+			Boolean userRegistrationcheck = userAuthService.userRegistration(userRegistration);
+			if(userRegistrationcheck) {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
 		}catch(BusinesException e) {
 			LOGGER.error("unable to user registration : {}",e.getMessage());
 			throw new BusinesException("unable to user registration", e);

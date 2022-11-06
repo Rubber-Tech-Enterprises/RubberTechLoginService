@@ -45,11 +45,9 @@ public class JwtController implements JwtApi {
 					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
 		} catch (UsernameNotFoundException e) {
-			e.printStackTrace();
-			throw new BusinesException("Bad Credentials");
+			throw new BusinesException("Bad Credentials",e);
 		} catch (BadCredentialsException e) {
-			e.printStackTrace();
-			throw new BusinesException("Bad Credentials");
+			throw new BusinesException("Bad Credentials",e);
 		}
 		try {
 			userDetails = customUserDetailsService.loadUserByUsername(request.getUsername());

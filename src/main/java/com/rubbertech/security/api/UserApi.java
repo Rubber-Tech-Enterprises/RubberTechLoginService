@@ -33,5 +33,5 @@ public interface UserApi {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull retrival"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> userRegistration(@RequestBody UserRegistration userRegistration );
+	public ResponseEntity<Boolean> userRegistration(@RequestBody UserRegistration userRegistration );
 }

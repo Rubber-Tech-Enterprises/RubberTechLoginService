@@ -23,13 +23,18 @@ public class UserAuthController implements UserAuthApi {
 	private UserAuthService userAuthService;
 
 	@Override
-	public ResponseEntity<Void> updateUserAccountNonExpired(String username, Integer accountNonExpired) {
+	public ResponseEntity<Boolean> updateUserAccountNonExpired(String username, Integer accountNonExpired) {
 		LOGGER.info("entering updateUserAccountNonExpired");
 		LOGGER.debug("updateUserAccountNonExpired request username: {} ,accountNonExpired :{}", username,
 				accountNonExpired);
 		try {
-			userAuthService.updateUserAccountNonExpired(username, accountNonExpired);
-			return ResponseEntity.accepted().build();
+			Boolean updateUserAccountNonExpiredCheck = userAuthService.updateUserAccountNonExpired(username,
+					accountNonExpired);
+			if (updateUserAccountNonExpiredCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateUserAccountNonExpired UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in updateUserAccountNonExpired UserAuthController", e);
@@ -37,14 +42,18 @@ public class UserAuthController implements UserAuthApi {
 			throw new BusinesException("error in updateUserAccountNonExpired UserAuthController", e);
 		}
 	}
-	
+
 	@Override
-	public ResponseEntity<Void> updateaccountNonLocked(String username, Integer accountNonLocked) {
+	public ResponseEntity<Boolean> updateaccountNonLocked(String username, Integer accountNonLocked) {
 		LOGGER.info("entering updateaccountNonLocked");
 		LOGGER.debug("updateaccountNonLocked request username: {} ,accountNonLocked :{}", username, accountNonLocked);
 		try {
-			userAuthService.updateAccountNonLocked(username, accountNonLocked);
-			return ResponseEntity.accepted().build();
+			Boolean updateAccountNonLockedcheck = userAuthService.updateAccountNonLocked(username, accountNonLocked);
+			if (updateAccountNonLockedcheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateaccountNonLocked UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in updateaccountNonLocked UserAuthController", e);
@@ -54,13 +63,17 @@ public class UserAuthController implements UserAuthApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> updatecredentialsNonExpired(String username, Integer credentialsNonExpired) {
+	public ResponseEntity<Boolean> updatecredentialsNonExpired(String username, Integer credentialsNonExpired) {
 		LOGGER.info("entering updatecredentialsNonExpired");
 		LOGGER.debug("updatecredentialsNonExpired request username: {} ,credentialsNonExpired :{}", username,
 				credentialsNonExpired);
 		try {
-			userAuthService.updateCredentialsNonExpired(username, credentialsNonExpired);
-			return ResponseEntity.accepted().build();
+			Boolean updateCredentialsNonExpiredCheck = userAuthService.updateCredentialsNonExpired(username, credentialsNonExpired);
+			if (updateCredentialsNonExpiredCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updatecredentialsNonExpired UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in updatecredentialsNonExpired UserAuthController", e);
@@ -70,12 +83,16 @@ public class UserAuthController implements UserAuthApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> updateAccountEnable(String username, Integer acccountEnable) {
+	public ResponseEntity<Boolean> updateAccountEnable(String username, Integer acccountEnable) {
 		LOGGER.info("entering updateAccountEnable");
 		LOGGER.debug("updateAccountEnable request username: {} ,acccountEnable :{}", username, acccountEnable);
 		try {
-			userAuthService.updateAccountEnable(username, acccountEnable);
-			return ResponseEntity.accepted().build();
+			Boolean updateAccountEnableCheck = userAuthService.updateAccountEnable(username, acccountEnable);
+			if (updateAccountEnableCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
 		} catch (BusinesException e) {
 			LOGGER.error("error in updateAccountEnable UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in updateAccountEnable UserAuthController", e);
@@ -85,49 +102,63 @@ public class UserAuthController implements UserAuthApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> UpdateUserRole(String username, String oldUserRole, String newUserRole) {
+	public ResponseEntity<Boolean> UpdateUserRole(String username, String oldUserRole, String newUserRole) {
 		LOGGER.info("entering UpdateUserRole");
-		LOGGER.debug("UpdateUserRole request username: {} ,oldUserRole :{} newUserRole :{} ",username,oldUserRole,newUserRole);
+		LOGGER.debug("UpdateUserRole request username: {} ,oldUserRole :{} newUserRole :{} ", username, oldUserRole,
+				newUserRole);
 		try {
-			userAuthService.UpdateUserRole(username, oldUserRole, newUserRole);
-			return ResponseEntity.accepted().build();
-		}catch (BusinesException e) {
-			LOGGER.error("error in UpdateUserRole UserAuthController : {}",e.getMessage());
+			Boolean updateUserRoleCheck = userAuthService.UpdateUserRole(username, oldUserRole, newUserRole);
+			if (updateUserRoleCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
+		} catch (BusinesException e) {
+			LOGGER.error("error in UpdateUserRole UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in UpdateUserRole UserAuthController", e);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new BusinesException("error in UpdateUserRole UserAuthController", e);
 		}
-		
+
 	}
 
 	@Override
-	public ResponseEntity<Void> removeUserRole(String username, String userRole) {
+	public ResponseEntity<Boolean> removeUserRole(String username, String userRole) {
 		LOGGER.info("entering removeUserRole");
-		LOGGER.debug("removeUserRole request username: {} ,userRole :{} ",username,userRole);
+		LOGGER.debug("removeUserRole request username: {} ,userRole :{} ", username, userRole);
 		try {
-			userAuthService.removeUserRole(username, userRole);
-			return ResponseEntity.accepted().build();
-		}catch (BusinesException e) {
-			LOGGER.error("error in removeUserRole UserAuthController : {}",e.getMessage());
+			Boolean removeUserRoleCheck = userAuthService.removeUserRole(username, userRole);
+			if (removeUserRoleCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
+		} catch (BusinesException e) {
+			LOGGER.error("error in removeUserRole UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in removeUserRole UserAuthController", e);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new BusinesException("error in removeUserRole UserAuthController", e);
 		}
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Override
-	public ResponseEntity<Void> addUserRole(String username, String userRole) {
+	public ResponseEntity<Boolean> addUserRole(String username, String userRole) {
 		LOGGER.info("entering addUserRole");
-		LOGGER.debug("addUserRole request username: {} ,userRole :{} ",username,userRole);
+		LOGGER.debug("addUserRole request username: {} ,userRole :{} ", username, userRole);
 		try {
-			userAuthService.addUserRole(username, userRole); 
-			return ResponseEntity.accepted().build();
-		}catch (BusinesException e) {
-			LOGGER.error("error in addUserRole UserAuthController : {}",e.getMessage());
+			Boolean addUserRoleCheck = userAuthService.addUserRole(username, userRole);
+			if (addUserRoleCheck) {
+				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
+		} catch (BusinesException e) {
+			LOGGER.error("error in addUserRole UserAuthController : {}", e.getMessage());
 			throw new BusinesException("error in addUserRole UserAuthController", e);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new BusinesException("error in addUserRole UserAuthController", e);
-		}	}
+		}
+	}
 
 }
