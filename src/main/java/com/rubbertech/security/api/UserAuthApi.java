@@ -13,7 +13,7 @@ public interface UserAuthApi {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> updateUserAccountNonExpired(
+	public ResponseEntity<Boolean> updateUserAccountNonExpired(
 			@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "accountNonExpired", required = true) Integer accountNonExpired);
 
@@ -21,7 +21,7 @@ public interface UserAuthApi {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> updateaccountNonLocked(
+	public ResponseEntity<Boolean> updateaccountNonLocked(
 			@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "accountNonLocked", required = true) Integer accountNonLocked);
 
@@ -29,7 +29,7 @@ public interface UserAuthApi {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> updatecredentialsNonExpired(
+	public ResponseEntity<Boolean> updatecredentialsNonExpired(
 			@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "credentialsNonExpired", required = true) Integer credentialsNonExpired);
 
@@ -37,25 +37,25 @@ public interface UserAuthApi {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> updateAccountEnable(@RequestParam(name = "username", required = true) String username,
+	public ResponseEntity<Boolean> updateAccountEnable(@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "accountEnable", required = true) Integer acccountEnable);
 	
 	@PutMapping(path = "/update/user/role")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> UpdateUserRole(@RequestParam(name="username",required = true) String username,@RequestParam("oldUserRole") String oldUserRole,@RequestParam("newUserRole") String newUserRole);
+	public ResponseEntity<Boolean> UpdateUserRole(@RequestParam(name="username",required = true) String username,@RequestParam("oldUserRole") String oldUserRole,@RequestParam("newUserRole") String newUserRole);
 	
 	@PutMapping(path = "/remove/user/role")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void>	removeUserRole(@RequestParam(name = "username",required = true) String username,@RequestParam(name ="userRole",required = true ) String userRole);
+	public ResponseEntity<Boolean>	removeUserRole(@RequestParam(name = "username",required = true) String username,@RequestParam(name ="userRole",required = true ) String userRole);
 	
 	@PutMapping(path = "/add/user/role")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "succesfull updated"),
 			@ApiResponse(responseCode = "500", description = "Not Found"),
 			@ApiResponse(responseCode = "404", description = "service not found") })
-	public ResponseEntity<Void> addUserRole(@RequestParam("username") String username,@RequestParam("userrole") String userRole);
+	public ResponseEntity<Boolean> addUserRole(@RequestParam("username") String username,@RequestParam("userrole") String userRole);
 	
 }

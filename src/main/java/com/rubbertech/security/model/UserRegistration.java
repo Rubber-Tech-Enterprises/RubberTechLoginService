@@ -2,6 +2,7 @@ package com.rubbertech.security.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,21 +18,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserRegistration {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonIgnore
 	private long id;
+	@Column(name = "fName")
 	@Size(min = 3,max = 8,message = "first Name rage should be 3 to 8")
 	private String fName;
+	@Column(name = "LName")
 	@Size(min = 3,max = 8,message = "last Name rage should be 3 to 8")
 	private String LName;
+	@Column(name = "userid",unique = true)
 	@Size(min = 3,max = 15,message = "userId rage should be 3 to 15")
 	private String userid;
+	@Column(name = "password")
 	@Size(min = 8,max = 15,message = "password range  should be 8 to 15")
 	private String password;
+	@Column(name = "confirmPassword")
 	@NotNull
 	private String confirmPassword;
+	@Column(name = "mobileNumber")
 	@Size(min = 10,max = 13,message = "mobile Number should be 3 to 13")
 	private String mobileNumber;
+	@Column(name = "email",unique = true)
 	@Size(min = 8,max = 20,message = "email id should be 8 to 25")
 	private String email;
 	@NotNull
