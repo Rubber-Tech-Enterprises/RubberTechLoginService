@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.rubbertech.security.exception.BusinesException;
 import com.rubbertech.security.model.UserRole;
+import com.rubbertech.security.model.UserRoleCheck;
 
 @Component
 public class UserValidatorUtil {
@@ -44,12 +45,14 @@ public class UserValidatorUtil {
 		}
 		return check;
 	}
-	
+
 	public String userRoleCheck(String checkUserRole) {
-		List<String> roles=Arrays.asList(UserRole.ROLE_ADMIN.getUserRole(),UserRole.ROLE_USER.getUserRole(),UserRole.ROLE_SELLER.getUserRole());
-		for(String userRole:roles) {
-			if(checkUserRole.equalsIgnoreCase(userRole)) {
-				checkUserRole=userRole;
+		List<String> roles = Arrays.asList(UserRoleCheck.ADMIN.getCheckRole(), UserRoleCheck.SELLER.getCheckRole(),
+				UserRoleCheck.USER.getCheckRole());
+		for (String userRole : roles) {
+			if (checkUserRole.equalsIgnoreCase(userRole)) {
+				StringBuilder builder = new StringBuilder();
+				checkUserRole = builder.append("ROLE_").append(userRole).toString();
 				return checkUserRole;
 			}
 		}

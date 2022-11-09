@@ -174,13 +174,15 @@ return check;
 		LOGGER.debug("addUserRole request  username: {} userRole : {} ", username, userRole);
 		try {
 			userRole = userValidatorUtil.userRoleCheck(userRole);
-			List<String> allUserRole = userRepository.getAllUserRole(username);
-			LOGGER.debug("addUserRole response :{}", allUserRole);
-			userRole = userValidatorUtil.userRoleCheck(userRole);
-			if (Objects.nonNull(username) && Objects.nonNull(userRole) && Objects.nonNull(allUserRole)) {
+			if (Objects.nonNull(username) && Objects.nonNull(userRole)) {
 				String checkUserRole = userRole;
-				String checkedRole = allUserRole.stream().filter(role -> role.equalsIgnoreCase(checkUserRole))
+				List<String> allUserRole = userRepository.getAllUserRole(username);
+				LOGGER.debug("addUserRole response :{}", allUserRole);
+				String checkedRole=null;
+				if(Objects.nonNull(allUserRole)) {
+				 checkedRole = allUserRole.stream().filter(role -> role.equalsIgnoreCase(checkUserRole))
 						.findFirst().orElse(null);
+				}
 				if (Objects.isNull(checkedRole)) {
 					userRepository.addUserRoles(username, userRole);
 					check=true;

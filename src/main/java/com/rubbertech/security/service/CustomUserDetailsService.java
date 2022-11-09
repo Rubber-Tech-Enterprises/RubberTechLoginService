@@ -2,6 +2,8 @@ package com.rubbertech.security.service;
 
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +16,8 @@ import com.rubbertech.security.repo.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(CustomUserDetailsService.class);
 		
 	@Autowired
 	private UserRepository repository;
@@ -26,6 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if(Objects.nonNull(user)) {
 			return new UserService(user);
 		}else {
+			LOGGER.error("user not faund");
 			throw new BusinesException("user not faund");
 		}
 	}
